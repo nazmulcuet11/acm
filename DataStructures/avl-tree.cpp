@@ -28,12 +28,15 @@ private:
     Node* left_rotate(Node *x);
     Node* right_rotate(Node *x);
     Node* update_balance(Node *node);
+    Node* left_most_node(Node *node);
 
     Node* __insert(Node *node, int key);
+    Node* __remove(Node *node, int key);
 public:
     AvlTree();
     ~AvlTree();
     void insert(int key);
+    void remove(int key);
 };
 
 AvlTree::AvlTree()
@@ -128,6 +131,12 @@ Node* AvlTree::update_balance(Node *node)
     return node;
 }
 
+Node* AvlTree::left_most_node(Node *node)
+{
+    if(node == NULL || node->left == NULL) return node;
+    return left_most_node(node->left);
+}
+
 Node* AvlTree::__insert(Node *node, int key) 
 {
     if(node == NULL) return new Node(key);
@@ -150,14 +159,64 @@ void AvlTree::insert(int key)
     root = __insert(root, key);
 }
 
+Node* AvlTree::__remove(Node* node, int key)
+{
+    if(node == NULL) return node;
+
+    if(node->key > key)
+        node->left = __remove(node->left, key);
+    else if(node->key < key)
+        node->right = __remove(node->right, key);
+    else
+    {
+        if(node->left == NULL && node->right == NULL)
+        {
+            Node *temp = node;
+            delete temp;
+            node = NULL;
+        }
+        else if(node->left == NULL || node->right == NULL)
+        {
+            Node *temp = node->left ? node->left : node->right;
+            *node = *temp;
+            delete temp;
+        }
+        else
+        {
+            Node *temp = left_most_node(node->right);
+            swap(node->key, temp->key);
+            node->right = __remove(node->right, key);
+        }
+    }
+
+    //deleted element with no child
+    if(node == NULL) 
+        return node;
+
+    update_height(node);
+    node = update_balance(node);
+
+    return node;
+}
+
+void AvlTree::remove(int key)
+{
+    root = __remove(root, key);
+}
 
 int main(int argc, char const *argv[])
 {
     AvlTree *tree = new AvlTree();
-    tree->insert(3);
-    tree->insert(2);
-    tree->insert(4);
+    tree->insert(9);
     tree->insert(5);
+    tree->insert(10);
+    tree->insert(0);
     tree->insert(6);
+    tree->insert(11);
+    tree->insert(-1);
+    tree->insert(1);
+    tree->insert(2);
+
+    tree->remove(9);
     return 0;
 }
