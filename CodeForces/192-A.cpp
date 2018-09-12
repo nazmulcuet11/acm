@@ -4,7 +4,7 @@ using namespace std;
 
 int main(int argc, char const *argv[])
 {
-    //freopen("input.txt", "r", stdin);
+    freopen("input.txt", "r", stdin);
     int n, col[105], row[105];
     char room[105][105];
     
