@@ -6,12 +6,11 @@
     "code-runner.executorMap": {
         "cpp": "g++ -g $dir$fileName -o a.out && echo 'running $fileName ...\\n' && ./a.out && echo '\\nexit'"
     },
-    // Whether to preserve focus on code editor after code run is triggered.
     "code-runner.preserveFocus": false,
     "editor.renderWhitespace": "all",
     "code-runner.saveFileBeforeRun": true,
     "workbench.statusBar.visible": true,
     "workbench.activityBar.visible": true,
     "editor.minimap.enabled": true,
-    "git.autofetch": true,
+    "git.autofetch": true
 }
