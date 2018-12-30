@@ -177,9 +177,9 @@ Node* AvlTree::__remove(Node* node, int key)
         }
         else if(node->left == NULL || node->right == NULL)
         {
-            Node *temp = node->left ? node->left : node->right;
-            *node = *temp;
-            delete temp;
+            Node *child = node->left ? node->left : node->right;
+            *node = *child;
+            delete child;
         }
         else
         {
