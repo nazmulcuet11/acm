@@ -22,7 +22,7 @@
             "name": "CPP: (lldb) Launch",
             "type": "cppdbg",
             "request": "launch",
-            "preLaunchTask": "build",
+            "preLaunchTask": "cpp-build",
             "program": "${workspaceFolder}/a.out",
             "args": [],
             "stopAtEntry": false,
