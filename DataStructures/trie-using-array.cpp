@@ -46,7 +46,6 @@ int find(char s[], int len)
         int char_index = s[i] - 'a';
         if(trie[curr][char_index] == -1)
             return 0;
-        cout << curr << endl;
         curr = trie[curr][char_index];
     }
     return finished[curr];
@@ -54,16 +53,17 @@ int find(char s[], int len)
 
 int main(int argc, char const *argv[])
 {
+    init();
     char apple[] = "apple";
     char application[] = "application";
     insert(apple, 5);
     insert(application, 11);
 
     cout << find(apple, 5) << endl;
-    // cout << find(application, 11) << endl;
+    cout << find(application, 11) << endl;
     
     char abcd[] = "abcd";
-    // cout << find(abcd, 4) << endl;
+    cout << find(abcd, 4) << endl;
 
     return 0;
 }
