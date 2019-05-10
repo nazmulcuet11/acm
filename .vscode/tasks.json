@@ -4,7 +4,7 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "cpp-build",
+            "label": "g++-build-cpp",
             "type": "shell",
             "command": "g++ -g ${relativeFile} -o a.out",
             "group": {
@@ -19,6 +19,23 @@
                 "showReuseMessage": true
             },
             "problemMatcher":"$gcc"
+        },
+        {
+            "label": "clang-build-cpp",
+            "type": "shell",
+            "command": "clang++",
+            "args": [
+                "-std=c++17",
+                "-stdlib=libc++",
+                "${relativeFile}",
+                "-o",
+                "a.out",
+                "--debug"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
         }
     ]
 }
