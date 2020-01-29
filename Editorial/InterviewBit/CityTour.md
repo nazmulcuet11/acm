@@ -12,9 +12,9 @@ This question uses the concept of combinatorics. We can see vector `B` as ranges
 Suppose we have a single group `G1` consisting `N` numbers, so this group can be permuted in 2<sup>N-1</sup> ways(as we can take from either side of the group and keep choosing until there is only one number left). Obviously the left most and right most group can be arranged among themselves in only one possible way.
 
 Now consider another group `G2` of `M` numbers. If we take numbers  from `G1` first and then from `G2`, for each possible way in `G1` we will have 2<sup>M-1</sup> possible ways to arrange numbers of `G2`. Now we have total `N+M` numbers and we can divide them in two group of size `N` and `M` in <sup>N+M</sup>C<sub>M</sub> ways.
-So we will have total 2<sup>N-1</sup> x 2<sup>(M-1)</sup> x <sup>N+M</sup>C<sub>M</sub> ways to arrange numbers of `G1` and `G2` combined.
+So we will have total 2<sup>N-1</sup> x 2<sup>M-1</sup> x <sup>N+M</sup>C<sub>M</sub> ways to arrange numbers of `G1` and `G2` combined.
 
-Now extend this idea further, consider another group `G3` with `K` numbers will join this two group `G1` and `G2`. So numbers of `G3` can be arranged in 2<sup>K-1</sup> ways, and from `N+M+K` numbers we can create `G3` in <sup>N+M+K</sup>C<sub>K</sub> ways, again after creating `G3`, from `N+M` numbers(as we have created `G3` we have N+M numbers left) we can create `G2` in <sup>N+M</sup>C<sub>M</sub> ways.
+Now extend this idea further, consider another group `G3` with `K` numbers will join this two group `G1` and `G2`. So numbers of `G3` can be arranged in 2<sup>K-1</sup> ways, and from `N+M+K` numbers we can create `G3` in <sup>N+M+K</sup>C<sub>K</sub> ways, again after creating `G3`, from `N+M` numbers(as we have created `G3` we have `N+M` numbers left) we can create `G2` in <sup>N+M</sup>C<sub>M</sub> ways.
 
 So total number of possible arrangement is <br>
 &nbsp;&nbsp;&nbsp;&nbsp;
