@@ -55,6 +55,15 @@
                 "traceResponse": true,
                 "engineLogging": true
             }
+        },
+        {
+            "name": "codelldb",
+            "type": "lldb",
+            "request": "launch",
+            "preLaunchTask": "clang-build-cpp",
+            "program": "${workspaceFolder}/a.out",
+            "args": [],
+            "cwd": "${workspaceFolder}"
         }
     ]
 }
