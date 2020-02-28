@@ -10,3 +10,11 @@ def next_permutation(a):
             a[i+1: len(a)] = sorted(a[i+1:len(a)])
             break
     return a
+
+a = [1, 2, 3, 4]
+while True:
+    next = next_permutation(a)
+    print(next)
+    if not next:
+        break
+    a = next
