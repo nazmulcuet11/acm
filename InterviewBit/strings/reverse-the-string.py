@@ -6,4 +6,4 @@ class Solution:
         words = words[::-1]
         return ' '.join(words)
 
-print(Solution().solve(""))
+print(Solution().solve("the sky is blue"))
