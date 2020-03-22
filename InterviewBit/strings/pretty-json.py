@@ -13,8 +13,7 @@ def pretify(json):
             pretified_json += '\t' * indent_count
             already_in_a_new_line = True
         elif ch == '}' or ch == ']':
-            if not already_in_a_new_line:
-                pretified_json += '\n'
+            pretified_json += '\n'
             indent_count -= 1
             pretified_json += '\t' * indent_count
             pretified_json += ch
