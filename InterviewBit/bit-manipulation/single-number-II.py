@@ -45,15 +45,14 @@ print("{0:b}".format(ans))
 print("{0:b}".format(-4))
 
 
-number = -2
-for i in range(31, -1, -1):
-    bit = 1 if number & (1 << i) > 0 else 0
-    print(bit, end = '')
-print()
+def print_bits(number, bit_count):
+    for i in range(bit_count-1, -1, -1):
+        bit = 1 if number & (1 << i) > 0 else 0
+        print(bit, end = '')
+    print()
 
-number = -4
-number = ~number
-for i in range(31, -1, -1):
-    bit = 1 if number & (1 << i) > 0 else 0
-    print(bit, end = '')
-print()
+print_bits(-2, 32)
+print_bits(21, 32)
+print_bits(~21, 32)
+print_bits(-21, 32)
+print_bits(~-21, 32)
