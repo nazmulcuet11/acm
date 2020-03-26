@@ -46,7 +46,14 @@ print("{0:b}".format(-4))
 
 
 number = -2
-for i in range(63, -1, -1):
+for i in range(31, -1, -1):
+    bit = 1 if number & (1 << i) > 0 else 0
+    print(bit, end = '')
+print()
+
+number = -4
+number = ~number
+for i in range(31, -1, -1):
     bit = 1 if number & (1 << i) > 0 else 0
     print(bit, end = '')
 print()
