@@ -8,4 +8,10 @@ def generate_gray_code(n):
         all_codes += new_codes
     return all_codes
 
+class Solution:
+    # @param A : integer
+    # @return a list of integers
+    def grayCode(self, A):
+        return generate_gray_code(A)
+
 print(generate_gray_code(3))
