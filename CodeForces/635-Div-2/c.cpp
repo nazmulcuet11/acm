@@ -22,8 +22,6 @@ struct Node {
 
 vector<int> grpah[MAX_N];
 int depth[MAX_N];
-// int out_deg[MAX_N]; 
-// int parent[MAX_N];
 bool industry[MAX_N];
 int industry_cnt[MAX_N];
 int visited[MAX_N];
@@ -32,9 +30,7 @@ int num_of_child[MAX_N];
 void reset(int n) {
     for(int i = 0; i <= n; i++) {
         grpah[i].clear();
-        out_deg[i] = 0;
         depth[i] = -1;
-        parent[i] = -1;
         industry[i] = false;
         industry_cnt[i] = 0;
         visited[i] = false;
@@ -47,9 +43,7 @@ void dfs(int u) {
         int v = grpah[u][i];
         if(depth[v] == -1) 
         {
-            out_deg[u]++;
             depth[v] = depth[u] + 1;
-            parent[v] = u;
             dfs(v);
             num_of_child[u] += num_of_child[v] + 1;
         }
