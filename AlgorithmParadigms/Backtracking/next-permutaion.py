@@ -11,7 +11,8 @@ def next_permutation(a):
             break
     return a
 
-a = [1, 2, 3, 4]
+a = [2, 2, 3, 3]
+print(a)
 while True:
     next = next_permutation(a)
     print(next)
