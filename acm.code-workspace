@@ -71,7 +71,6 @@
 			"typeinfo": "cpp",
 			"unordered_map": "cpp",
 			"utility": "cpp"
-		},
-		"python.pythonPath": "/usr/bin/python3"
+        }
 	}
 }
