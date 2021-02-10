@@ -3,14 +3,11 @@ class Solution:
     # @param B : integer
     # @return an integer
     def solve(self, A, B):
-        hash = {}
-        for v in A:
-            hash[v] = 1
-
+        s = set(A)
         count = 0
-        for k in hash:
+        for k in s:
             t = k ^ B
-            if t in hash:
+            if t in s:
                 count += 1
 
         return count // 2
