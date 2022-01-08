@@ -2,24 +2,25 @@
     // Use IntelliSense to learn about possible attributes.
     // Hover to view descriptions of existing attributes.
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    // cppdbg dos not work with ARM64 machines, use codelldb instead
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Python: Terminal (external)",
+            "name": "Python: External Terminal",
             "type": "python",
             "request": "launch",
             "program": "${file}",
             "console": "externalTerminal"
         },
         {
-            "name": "Python: Terminal (integrated)",
+            "name": "Python: Integrated Terminal",
             "type": "python",
             "request": "launch",
             "program": "${file}",
             "console": "integratedTerminal"
         },
         {
-            "name": "(lldb) g++-cpp",
+            "name": "(cppdbg) g++",
             "type": "cppdbg",
             "request": "launch",
             "preLaunchTask": "g++-build-cpp",
@@ -39,7 +40,7 @@
             ]
         },
         {
-            "name": "(lldb) clang-cpp",
+            "name": "(cppdbg) clang",
             "type": "cppdbg",
             "request": "launch",
             "preLaunchTask": "clang-build-cpp",
@@ -57,7 +58,7 @@
             }
         },
         {
-            "name": "codelldb",
+            "name": "codelldb clang",
             "type": "lldb",
             "request": "launch",
             "preLaunchTask": "clang-build-cpp",
