@@ -12,3 +12,6 @@
 
 # Ignore Gradle build output directory
 build
+
+# jetbrains idea
+.idea
