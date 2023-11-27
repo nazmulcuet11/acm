@@ -3,7 +3,7 @@ package leetcode;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Solution784 {
+public class LeetCode784 {
     public List<String> letterCasePermutation(String s) {
         List<String> ans = new ArrayList<>();
         generatePermutations(s, 0, "", ans);

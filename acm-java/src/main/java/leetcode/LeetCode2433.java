@@ -1,9 +1,6 @@
 package leetcode;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
-public class Solution2433 {
+public class LeetCode2433 {
     public int[] findArray(int[] pref) {
         var ans = new int[pref.length];
         for (int i = 0; i < pref.length; i++) {

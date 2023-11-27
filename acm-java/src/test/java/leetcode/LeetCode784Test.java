@@ -6,8 +6,8 @@ import java.util.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class Solution784Test {
-    Solution784 sut = new Solution784();
+class LeetCode784Test {
+    LeetCode784 sut = new LeetCode784();
 
     @Test
     void testCaseOne() {

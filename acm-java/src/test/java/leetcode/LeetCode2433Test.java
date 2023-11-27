@@ -4,8 +4,8 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class Solution2433Test {
-    Solution2433 sut = new Solution2433();
+class LeetCode2433Test {
+    LeetCode2433 sut = new LeetCode2433();
 
     @Test
     void testCaseOne() {

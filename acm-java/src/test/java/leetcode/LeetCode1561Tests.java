@@ -3,8 +3,8 @@ package leetcode;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
-class Solution1561Tests {
-    Solution1561 sut = new Solution1561();
+class LeetCode1561Tests {
+    LeetCode1561 sut = new LeetCode1561();
 
     @Test
     void testCaseOne() {
