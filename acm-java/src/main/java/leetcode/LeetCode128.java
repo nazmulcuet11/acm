@@ -4,57 +4,36 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LeetCode128 {
-    static class Range {
-        int start, end;
+    Map<Integer, Integer> rangeStartToRangeEndMap = new HashMap<>();
 
-        Range(int start, int end) {
-            this.start = start;
-            this.end = end;
-        }
+    void mergeWithOtherRanges(Integer start) {
+        var end = rangeStartToRangeEndMap.get(start);
+        if (end == null) return;
 
-        int length() {
-            return end - start + 1;
-        }
-    }
-
-    Map<Integer, Range> rangeStartToRangeMap = new HashMap<>();
-
-    Range getMergedRange(Range lhs, Range rhs) {
-        return new Range(
-            Math.min(lhs.start, rhs.start),
-            Math.max(lhs.end, rhs.end)
-        );
-    }
-
-    void mergeWithOtherRanges(Range range) {
-        Range other = rangeStartToRangeMap.get(range.end + 1);
-        if (other == null) {
-            return;
-        }
+        var otherEnd = rangeStartToRangeEndMap.get(end + 1);
+        if (otherEnd == null) return;
 
         // remove existing ranges
-        rangeStartToRangeMap.remove(range.start);
-        rangeStartToRangeMap.remove(other.start);
+        rangeStartToRangeEndMap.remove(end + 1);
 
         // add new range
-        var mergedRange = getMergedRange(range, other);
-        rangeStartToRangeMap.put(mergedRange.start, mergedRange);
+        rangeStartToRangeEndMap.put(start, otherEnd);
 
-        mergeWithOtherRanges(mergedRange);
+        mergeWithOtherRanges(start);
     }
 
     public int longestConsecutive(int[] nums) {
         for(int num: nums) {
-            rangeStartToRangeMap.put(num, new Range(num, num));
+            rangeStartToRangeEndMap.put(num, num);
         }
 
         for (int num: nums) {
-            mergeWithOtherRanges(new Range(num, num));
+            mergeWithOtherRanges(num);
         }
 
         int ans = 0;
-        for (var range: rangeStartToRangeMap.values()) {
-            ans = Math.max(ans, range.length());
+        for (var entry: rangeStartToRangeEndMap.entrySet()) {
+            ans = Math.max(ans, entry.getValue() - entry.getKey() + 1);
         }
 
         return ans;
