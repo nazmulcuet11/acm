@@ -18,7 +18,6 @@ public class LeetCode784 {
     ) {
         if (index >= original.length()) {
             ans.add(current);
-            current = "";
             return;
         }
 
