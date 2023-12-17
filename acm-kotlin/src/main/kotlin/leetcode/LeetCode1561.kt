@@ -1,6 +1,6 @@
 package leetcode
 
-class Solution1561 {
+class LeetCode1561 {
     fun maxCoins(piles: IntArray): Int {
         return piles
             .sortedDescending()

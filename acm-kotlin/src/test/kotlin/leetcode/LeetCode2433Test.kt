@@ -3,8 +3,8 @@ package leetcode
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
-class Solution2433Test {
-    private val sut = Solution2433()
+class LeetCode2433Test {
+    private val sut = LeetCode2433()
     @Test
     fun testCaseOne() {
         assertArrayEquals(

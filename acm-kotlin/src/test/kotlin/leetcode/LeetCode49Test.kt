@@ -3,8 +3,8 @@ package leetcode
 import org.junit.jupiter.api.Assertions.*
 import kotlin.test.Test
 
-class Solution49Test {
-    private val sut = Solution49()
+class LeetCode49Test {
+    private val sut = LeetCode49()
 
     @Test
     fun testCaseOne() {

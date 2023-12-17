@@ -1,6 +1,6 @@
 package leetcode
 
-class Solution2433 {
+class LeetCode2433 {
     fun findArray(pref: IntArray): IntArray {
         return (0..< pref.count())
             .map { i ->

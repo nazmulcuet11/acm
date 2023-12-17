@@ -4,9 +4,9 @@ import org.junit.jupiter.api.Test
 
 import org.junit.jupiter.api.Assertions.*
 
-class Solution1561Test {
+class LeetCode1561Test {
 
-    val sut = Solution1561()
+    val sut = LeetCode1561()
 
     @Test
     fun testCaseOne() {
