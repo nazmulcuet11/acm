@@ -14,25 +14,17 @@ class LeetCode93 {
             return trySplitting(s, splitPoints)?.let { listOf(it) } ?: listOf()
         }
 
-        val ans: MutableList<String> = mutableListOf()
-        for (j in i + 1..<s.length) {
-            ans += restoreIpAddresses(s, j, splitPoints + listOf(j))
-        }
-        return ans
+        return (i + 1..s.length)
+            .flatMap { restoreIpAddresses(s, it, splitPoints + listOf(it)) }
     }
 
     private fun trySplitting(s: String, splitPoints: List<Int>): String? {
-        val parts: MutableList<String> = mutableListOf()
-        @Suppress("NAME_SHADOWING")
-        val splitPoints = listOf(0) + splitPoints + listOf(s.length)
-        for (i in 1..<splitPoints.count()) {
-            val part = s.substring(splitPoints[i - 1], splitPoints[i])
-            if (!isValidPart(part)) {
-                return null
-            }
-            parts.add(part)
-        }
-        return parts.joinToString(".")
+        val parts = (listOf(0) + splitPoints)
+            .zip(splitPoints + listOf(s.length))
+            .map { s.substring(it.first, it.second) }
+            .filter { isValidPart(it) }
+
+        return if (parts.count() == 4) parts.joinToString(".") else null
     }
 
     private fun isValidPart(part: String): Boolean {
