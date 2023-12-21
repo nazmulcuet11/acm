@@ -2,21 +2,29 @@ package leetcode
 
 class LeetCode93 {
     fun restoreIpAddresses(s: String): List<String> {
+        return restoreIpAddresses(s, 0, listOf())
+    }
+
+    private fun restoreIpAddresses(
+        s: String,
+        i: Int,
+        splitPoints: List<Int>
+    ): List<String> {
+        if (splitPoints.count() == 3) {
+            return trySplitting(s, splitPoints)?.let { listOf(it) } ?: listOf()
+        }
+
         val ans: MutableList<String> = mutableListOf()
-        for (i in 1..s.length - 3) {
-            for (j in i + 1 .. s.length - 2) {
-                for (k in j + 1..<s.length) {
-                    trySplitting(listOf(0, i, j, k, s.length), s)?.let {
-                        ans.add(it)
-                    }
-                }
-            }
+        for (j in i + 1..<s.length) {
+            ans += restoreIpAddresses(s, j, splitPoints + listOf(j))
         }
         return ans
     }
 
-    private fun trySplitting(splitPoints: List<Int>, s: String): String? {
+    private fun trySplitting(s: String, splitPoints: List<Int>): String? {
         val parts: MutableList<String> = mutableListOf()
+        @Suppress("NAME_SHADOWING")
+        val splitPoints = listOf(0) + splitPoints + listOf(s.length)
         for (i in 1..<splitPoints.count()) {
             val part = s.substring(splitPoints[i - 1], splitPoints[i])
             if (!isValidPart(part)) {
