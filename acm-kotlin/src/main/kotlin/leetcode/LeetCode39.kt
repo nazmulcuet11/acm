@@ -15,17 +15,15 @@ class LeetCode39 {
             return listOf(current.toList())
         }
 
-        val ans: MutableList<List<Int>> = mutableListOf()
-        for (j in i..<candidates.size) {
-            if (target - candidates[j] >= 0) {
-                ans += combinationSum(
+        return (i..<candidates.size)
+            .filter { target - candidates[it] >= 0 }
+            .flatMap {
+                combinationSum(
                     candidates,
-                    j,
-                    target - candidates[j],
-                    current + listOf(candidates[j])
+                    it,
+                    target - candidates[it],
+                    current + listOf(candidates[it])
                 )
             }
-        }
-        return ans
     }
 }
