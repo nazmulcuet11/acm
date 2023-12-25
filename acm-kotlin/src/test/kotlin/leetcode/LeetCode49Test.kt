@@ -1,6 +1,7 @@
 package leetcode
 
 import org.junit.jupiter.api.Assertions.*
+import utils.sorted
 import kotlin.test.Test
 
 class LeetCode49Test {
