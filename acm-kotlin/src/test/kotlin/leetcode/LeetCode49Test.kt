@@ -34,10 +34,4 @@ class LeetCode49Test {
         )
         assertEquals(sorted(expectedOutput), sorted(sut.groupAnagrams(input)))
     }
-
-    private fun sorted(list: List<List<String>>): List<List<String>> {
-        return list
-            .map { it.sorted() }
-            .sortedBy { it.count() }
-    }
 }
