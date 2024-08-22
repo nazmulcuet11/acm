@@ -18,6 +18,7 @@ class LeetCode212 {
 
     private var root = TrieNode()
     private var board: Array<CharArray> = arrayOf()
+    private var maxWordLength = 0
     private val moves = listOf(
         Move(0, 1),
         Move(1, 0),
@@ -68,10 +69,9 @@ class LeetCode212 {
     }
 
     private fun populateTrie() {
-        this.root = TrieNode()
         for (i in board.indices) {
             for (j in board[i].indices) {
-                generate(Position(i, j), this.root, 10)
+                generate(Position(i, j), root, maxWordLength)
             }
         }
     }
@@ -93,7 +93,11 @@ class LeetCode212 {
         words: Array<String>
     ): List<String> {
         this.board = board
+        this.root = TrieNode()
+        this.maxWordLength = words.maxOf { it.length }
+
         populateTrie()
+
         val ans = mutableListOf<String>()
         for (word in words) {
             if (check(word)) {
