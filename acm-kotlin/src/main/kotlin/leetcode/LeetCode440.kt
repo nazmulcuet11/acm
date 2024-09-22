@@ -17,7 +17,6 @@ class LeetCode440 {
         }
 
         val count = countNodes(c.toLong(), c + 1L, n.toLong()).toInt()
-        println("$c, $count")
         return if (count >= k) {
             solve(c * 10, n, k - 1)
         } else {
