@@ -21,27 +21,21 @@ class LeetCode386 {
 
 // solution 2
 class LeetCode386 {
-
     private fun solve(c: Int, n: Int, ans: MutableList<Int>) {
         if (c > n) {
             return
         }
-
-        if (c != 0) {
-            ans.add(c)
-        }
-
+        ans.add(c)
         for (i in 0..9) {
-            if (c == 0 && i == 0) {
-                continue
-            }
             solve(c * 10 + i, n, ans)
         }
     }
 
     fun lexicalOrder(n: Int): List<Int> {
         val ans = mutableListOf<Int>()
-        solve(0, n, ans)
+        for (i in 1..9) {
+            solve(i, n, ans)
+        }
         return ans
     }
 }
