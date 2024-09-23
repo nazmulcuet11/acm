@@ -21,4 +21,15 @@ class LeetCode2707Test {
             sut.minExtraChar("sayhelloworld", arrayOf("hello","world"))
         )
     }
+
+    @Test
+    fun testCaseThree() {
+        assertEquals(
+            7,
+            sut.minExtraChar(
+                "dwmodizxvvbosxxw",
+                arrayOf("ox","lb","diz","gu","v","ksv","o","nuq","r","txhe","e","wmo","cehy","tskz","ds","kzbu")
+            )
+        )
+    }
 }
