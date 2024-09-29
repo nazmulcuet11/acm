@@ -2,16 +2,11 @@ package leetcode
 
 class LeetCode432 {
     class AllOne() {
-        private class Heap(val type: HeapType) {
+        private abstract class Heap {
             data class Info(
                 val key: String,
                 val count: Int
             )
-
-            enum class HeapType {
-                MIN,
-                MAX,
-            }
 
             private fun <T> MutableList<T>.swap(i: Int, j: Int) {
                 val t = this[i]
@@ -19,8 +14,12 @@ class LeetCode432 {
                 this[j] = t
             }
 
-            private val keyToIndex = mutableMapOf<String, Int>()
-            private val data = mutableListOf<Info>()
+            protected val keyToIndex = mutableMapOf<String, Int>()
+            protected val data = mutableListOf<Info>()
+
+            abstract fun shouldSwim(currentIndex: Int, parentIndex: Int): Boolean
+
+            abstract fun diveNextIndex(currentIndex: Int, leftChildIndex: Int, rightChildIndex: Int): Int
 
             fun insert(info: Info) {
                 data.add(info)
@@ -30,8 +29,7 @@ class LeetCode432 {
                 while (currentIndex > 0) {
                     val parentIndex = (currentIndex - 1) / 2
 
-                    if ((type == HeapType.MIN && data[parentIndex].count <= data[currentIndex].count) ||
-                        (type == HeapType.MAX && data[parentIndex].count >= data[currentIndex].count)) {
+                    if (!shouldSwim(currentIndex, parentIndex)) {
                         break
                     }
 
@@ -62,19 +60,7 @@ class LeetCode432 {
                     val leftChildIndex = currentIndex * 2 + 1
                     val rightChildIndex = currentIndex * 2 + 2
 
-                    var nextIndex = currentIndex
-                    if (leftChildIndex < data.size &&
-                        ((type == HeapType.MIN && data[leftChildIndex].count < data[nextIndex].count) ||
-                            (type == HeapType.MAX  && data[leftChildIndex].count > data[nextIndex].count))) {
-                        nextIndex = leftChildIndex
-                    }
-
-                    if (rightChildIndex < data.size &&
-                        ((type == HeapType.MIN && data[rightChildIndex].count < data[nextIndex].count) ||
-                            (type == HeapType.MIN && data[rightChildIndex].count > data[nextIndex].count))) {
-                        nextIndex = rightChildIndex
-                    }
-
+                    val nextIndex = diveNextIndex(currentIndex, leftChildIndex, rightChildIndex)
                     if (nextIndex == currentIndex) {
                         break
                     }
@@ -108,8 +94,44 @@ class LeetCode432 {
             }
         }
 
-        private val minHeap = Heap(Heap.HeapType.MIN)
-        private val maxHeap = Heap(Heap.HeapType.MAX)
+        private class MinHeap: Heap() {
+            override fun shouldSwim(currentIndex: Int, parentIndex: Int): Boolean {
+                return data[parentIndex].count > data[currentIndex].count
+            }
+
+            override fun diveNextIndex(currentIndex: Int, leftChildIndex: Int, rightChildIndex: Int): Int {
+                var minIndex = currentIndex
+                if (leftChildIndex < data.size && data[leftChildIndex].count < data[minIndex].count) {
+                    minIndex = leftChildIndex
+                }
+
+                if (rightChildIndex < data.size && data[rightChildIndex].count < data[minIndex].count) {
+                    minIndex = rightChildIndex
+                }
+                return minIndex
+            }
+        }
+
+        private class MaxHeap: Heap() {
+            override fun shouldSwim(currentIndex: Int, parentIndex: Int): Boolean {
+                return data[parentIndex].count < data[currentIndex].count
+            }
+
+            override fun diveNextIndex(currentIndex: Int, leftChildIndex: Int, rightChildIndex: Int): Int {
+                var maxIndex = currentIndex
+                if (leftChildIndex < data.size && data[leftChildIndex].count > data[maxIndex].count) {
+                    maxIndex = leftChildIndex
+                }
+
+                if (rightChildIndex < data.size && data[rightChildIndex].count > data[maxIndex].count) {
+                    maxIndex = rightChildIndex
+                }
+                return maxIndex
+            }
+        }
+
+        private val minHeap = MinHeap()
+        private val maxHeap = MaxHeap()
 
         private enum class Operation {
             INCREMENT,
