@@ -1,5 +1,6 @@
 package leetcode
 
+/*
 class LeetCode1545 {
     private val numberOfBits = MutableList<Int>(21) { 1 }
 
@@ -29,13 +30,20 @@ class LeetCode1545 {
         return findKthBit(n, k, false)
     }
 }
+*/
 
-/*
-S1 = "0"
-S2 = "011"
-S3 = "0111001"
-S4 = "0111001 1 0110001"
+class LeetCode1545 {
+    fun findKthBit(n: Int, k: Int): Char {
+        val numberOfBits = (1 shl n) - 1
+        val mid = (numberOfBits / 2) + 1
 
-n = 4, k = 11
-15, 11
- */
+        return if (k == mid) {
+            if (k == 1) '0' else '1'
+        } else if (k < mid) {
+            findKthBit(n - 1, k)
+        } else {
+            val x = findKthBit(n, numberOfBits - k + 1)
+            if (x == '0') '1' else '0'
+        }
+    }
+}
