@@ -6,12 +6,11 @@ class LeetCode3133 {
         var t = (n - 1).toLong()
         var i = 0
         while (t > 0) {
-            while (ans and (1L shl i) > 0)
-                i++
-
-            ans = ans or ((t and 1) shl i)
+            if (ans and (1L shl i) == 0L) {
+                ans = ans or ((t and 1) shl i)
+                t = t shr 1
+            }
             i++
-            t = t shr 1
         }
         return ans
     }
