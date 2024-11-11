@@ -18,6 +18,7 @@ class LeetCode2601 {
         }
     }
 
+    /*
     private fun findMaxPrimeLessThan(n: Int): Int {
         var x = n - 1
         while (x > 0 && !primes[x])
@@ -35,6 +36,27 @@ class LeetCode2601 {
                 return false
             }
             ans.add(n - primeToSubtract)
+        }
+        return true
+    }
+    */
+
+    fun primeSubOperation(nums: IntArray): Boolean {
+        calculatePrimes()
+        var currentNumber = 1
+        var i = 0
+        while (i < nums.size) {
+            val diff = nums[i] - currentNumber
+            if (diff < 0) {
+                return false
+            }
+
+            if (diff == 0 || primes[diff]) {
+                i++
+                currentNumber++
+            } else {
+                currentNumber++
+            }
         }
         return true
     }
