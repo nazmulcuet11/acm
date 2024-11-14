@@ -48,6 +48,7 @@ class LeetCode2563 {
 }
 */
 
+/*
 class LeetCode2563 {
     private fun lowerBound(nums: IntArray, n: Int, s: Int): Int {
         var l = s
@@ -72,5 +73,29 @@ class LeetCode2563 {
             ans += (y - x)
         }
         return ans
+    }
+}
+*/
+
+class LeetCode2563 {
+    private fun countFairPairsLessThan(nums: IntArray, n: Int): Long {
+        var l = 0
+        var h = nums.size - 1
+        var count = 0L
+        while (l < h) {
+            val sum = nums[l] + nums[h]
+            if (sum < n) {
+                count += h - l
+                l++
+            } else {
+                h--
+            }
+        }
+        return count
+    }
+
+    fun countFairPairs(nums: IntArray, lower: Int, upper: Int): Long {
+        nums.sort()
+        return countFairPairsLessThan(nums, upper + 1) - countFairPairsLessThan(nums, lower)
     }
 }
