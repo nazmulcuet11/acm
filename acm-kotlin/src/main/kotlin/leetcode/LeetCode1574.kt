@@ -2,6 +2,7 @@ package leetcode
 
 import kotlin.math.min
 
+/*
 class LeetCode1574 {
     fun findLengthOfShortestSubarray(arr: IntArray): Int {
         val n = arr.size
@@ -31,6 +32,33 @@ class LeetCode1574 {
 
             ans = min(ans,r - i - 1)
             i++
+        }
+
+        return ans
+    }
+}
+*/
+
+class LeetCode1574 {
+    fun findLengthOfShortestSubarray(arr: IntArray): Int {
+        val n = arr.size
+        var ans = n - 1
+
+        var r = n - 1
+        while (r > 0 && arr[r - 1] <= arr[r])
+            r--
+        ans = min(ans, r)
+
+        var l = 0
+        while (l < r) {
+            while (r < n && arr[r] < arr[l])
+                r++
+
+            ans = min(ans,r - l - 1)
+            if (arr[l] > arr[l + 1]) {
+                break
+            }
+            l++
         }
 
         return ans
