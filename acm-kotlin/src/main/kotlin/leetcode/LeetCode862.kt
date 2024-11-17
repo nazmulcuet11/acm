@@ -21,13 +21,11 @@ class LeetCode862 {
 
     fun shortestSubarray(nums: IntArray, k: Int): Int {
         val heap = PriorityQueue<Info>()
+        heap.add(Info(0, -1))
         var sum = 0L
         var ans = Int.MAX_VALUE
         for ((i, n) in nums.withIndex()) {
             sum += n
-            if (sum >= k) {
-                ans = min(ans, i + 1)
-            }
             while (heap.isNotEmpty() && sum - heap.peek().sum >= k) {
                 ans = min(ans, i - heap.poll().index)
             }
