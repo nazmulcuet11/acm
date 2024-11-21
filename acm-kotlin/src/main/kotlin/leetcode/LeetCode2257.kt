@@ -20,27 +20,27 @@ class LeetCode2257 {
         fun visit(
             initialX: Int,
             initialY: Int,
-            updateX: (Int) -> Int,
-            updateY: (Int) -> Int
+            deltaX: Int,
+            deltaY: Int,
         ) {
             var x = initialX
             var y = initialY
             while (x >= 0 && y >= 0 && x < m && y < n && grid[x][y] != 'g' && grid[x][y] != 'w') {
                 grid[x][y] = 'v'
-                x = updateX(x)
-                y = updateY(y)
+                x += deltaX
+                y += deltaY
             }
         }
 
         for (guard in guards) {
             // go top
-            visit(guard[0] - 1, guard[1], { it - 1 }, { it })
+            visit(guard[0] - 1, guard[1], -1, 0)
             // go down
-            visit(guard[0] + 1, guard[1], { it + 1 }, { it })
+            visit(guard[0] + 1, guard[1], 1, 0)
             // go left
-            visit(guard[0], guard[1] - 1, { it }, { it - 1 })
+            visit(guard[0], guard[1] - 1, 0, -1)
             // go right
-            visit(guard[0], guard[1] + 1, { it }, { it + 1 })
+            visit(guard[0], guard[1] + 1, 0, 1)
         }
 
         var count = 0
