@@ -3,11 +3,7 @@ package leetcode
 class LeetCode773 {
     private fun stringify(board: Array<IntArray>): String {
         val sb = StringBuilder()
-        for (row in board) {
-            for (n in row) {
-                sb.append(n.toString())
-            }
-        }
+        board.forEach { sb.append(it.joinToString("")) }
         return sb.toString()
     }
 
