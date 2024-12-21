@@ -18,7 +18,10 @@ class LeetCode2872 {
         }
 
         var ans = 0
-        val longValues = values.map { it.toLong() }.toLongArray()
+        for (i in values.indices) {
+            values[i] %= k
+        }
+
         while (q.isNotEmpty()) {
             val t = q.removeFirst()
             if (tree[t].isEmpty()) {
@@ -29,13 +32,13 @@ class LeetCode2872 {
 
             val p = tree[t].first()
 
-            if (longValues[t] % k.toLong() == 0L) {
+            if (values[t] % k == 0) {
                 // count as a separate component
                 ans++
             } else {
                 // can't be separate, merge with parent
-                longValues[p] += longValues[t]
-                longValues[t] = 0
+                values[p] = (values[p] + values[t]) % k
+                values[t] = 0
             }
 
             // disconnect
