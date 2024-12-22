@@ -2,19 +2,19 @@ package leetcode
 
 import java.util.*
 
-class MaxQueueComparator: Comparator<Int> {
-    override fun compare(o1: Int, o2: Int): Int {
-        return if (o1 < o2) {
-            1
-        } else if (o1 > o2) {
-            -1
-        } else {
-            0
+class LeetCode295 {
+    private class MaxQueueComparator: Comparator<Int> {
+        override fun compare(o1: Int, o2: Int): Int {
+            return if (o1 < o2) {
+                1
+            } else if (o1 > o2) {
+                -1
+            } else {
+                0
+            }
         }
     }
-}
 
-class LeetCode295 {
     private val leftQueue = PriorityQueue<Int>(MaxQueueComparator())
     private val rightQueue = PriorityQueue<Int>()
 

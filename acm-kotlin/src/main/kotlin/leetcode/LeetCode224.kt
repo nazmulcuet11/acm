@@ -1,36 +1,36 @@
 package leetcode
 
-class Tokenizer(private val s: String) {
-    private var i = 0
-
-    fun nextToken(): String? {
-        skipWhiteSpace()
-
-        if (i >= s.length) {
-            return null
-        }
-
-        if (s[i].isDigit()) {
-            val sb = StringBuilder()
-            while (i < s.length && s[i].isDigit()) {
-                sb.append(s[i])
-                i++
-            }
-            return sb.toString()
-        } else {
-            val token = "${s[i]}"
-            i++
-            return token
-        }
-    }
-
-    private fun skipWhiteSpace() {
-        while (i < s.length && s[i] == ' ')
-            i++
-    }
-}
-
 class LeetCode224 {
+    private class Tokenizer(private val s: String) {
+        private var i = 0
+
+        fun nextToken(): String? {
+            skipWhiteSpace()
+
+            if (i >= s.length) {
+                return null
+            }
+
+            if (s[i].isDigit()) {
+                val sb = StringBuilder()
+                while (i < s.length && s[i].isDigit()) {
+                    sb.append(s[i])
+                    i++
+                }
+                return sb.toString()
+            } else {
+                val token = "${s[i]}"
+                i++
+                return token
+            }
+        }
+
+        private fun skipWhiteSpace() {
+            while (i < s.length && s[i] == ' ')
+                i++
+        }
+    }
+
     private fun getTokens(s: String): List<String> {
         val tokenizer = Tokenizer(s)
         val tokens = mutableListOf<String>()

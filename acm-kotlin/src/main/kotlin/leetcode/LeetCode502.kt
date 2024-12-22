@@ -68,22 +68,22 @@ import java.util.*
 //    }
 //}
 
-data class Project (
-    val capital: Int,
-    val profit: Int,
-): Comparable<Project> {
-    override fun compareTo(other: Project): Int {
-        return if (this.profit < other.profit) {
-            1
-        } else if (this.profit > other.profit) {
-            -1
-        } else {
-            0
+class LeetCode502 {
+    private data class Project (
+        val capital: Int,
+        val profit: Int,
+    ): Comparable<Project> {
+        override fun compareTo(other: Project): Int {
+            return if (this.profit < other.profit) {
+                1
+            } else if (this.profit > other.profit) {
+                -1
+            } else {
+                0
+            }
         }
     }
-}
 
-class LeetCode502 {
     fun findMaximizedCapital(k: Int, w: Int, profits: IntArray, capital: IntArray): Int {
         val projects = mutableListOf<Project>()
         for (i in profits.indices) {
