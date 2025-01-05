@@ -2,13 +2,7 @@ package leetcode
 
 class LeetCode2381 {
     private fun next(c: Char, count: Int): Char {
-        val offset = if (count >= 0 ) {
-            count % 26
-        } else {
-            // if count is too much negative, example -36, adding just 26 won't be enough
-            -1 * ((-1 * count) % 26) + 26
-        }
-
+        val offset = ((count % 26) + 26) % 26
         return Char('a'.code + ((c.code - 'a'.code) + offset) % 26)
     }
 
