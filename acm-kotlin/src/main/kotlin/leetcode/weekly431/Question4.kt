@@ -93,23 +93,3 @@ class Question4 {
         return solve(0, 0).sorted().toIntArray()
     }
 }
-
-fun main() {
-    var ans = Question4().maximumWeight(
-        listOf(listOf(1, 3, 2), listOf(4, 5, 2), listOf(1, 5, 5), listOf(6, 9, 3), listOf(6, 7, 1), listOf(8, 9, 1))
-    )
-    println(ans.toList())
-
-    ans = Question4().maximumWeight(
-        listOf(
-            listOf(5, 8, 1),
-            listOf(6, 7, 7),
-            listOf(4, 7, 3),
-            listOf(9, 10, 6),
-            listOf(7, 8, 2),
-            listOf(11, 14, 3),
-            listOf(3, 5, 5)
-        )
-    )
-    println(ans.toList())
-}
