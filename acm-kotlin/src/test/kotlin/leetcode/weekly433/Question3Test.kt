@@ -1,4 +1,4 @@
-package leetcode.Weekly433
+package leetcode.weekly433
 
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals

@@ -1,4 +1,4 @@
-package leetcode.Weekly433
+package leetcode.weekly433
 
 import kotlin.math.min
 
