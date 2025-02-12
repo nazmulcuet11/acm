@@ -21,4 +21,12 @@ class LeetCode1910Test {
             sut.removeOccurrences("axxxxyyyyb", "xy")
         )
     }
+
+    @Test
+    fun case3() {
+        assertEquals(
+            "vsxsdxeeohapzuajrnogb",
+            sut.removeOccurrences("wvwswxwwwwsdwxweeohapwwzwuwajrnogb", "w")
+        )
+    }
 }
