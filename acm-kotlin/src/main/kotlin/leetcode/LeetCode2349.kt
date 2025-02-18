@@ -2,7 +2,7 @@ package leetcode
 
 import java.util.*
 
-class Leet2349 {
+class LeetCode2349 {
     class NumberContainers() {
         private val indexToNumber = mutableMapOf<Int, Int>()
         private val numberToIndices = mutableMapOf<Int, PriorityQueue<Int>>()

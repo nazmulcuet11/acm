@@ -3,10 +3,10 @@ package leetcode
 import org.junit.jupiter.api.Test
 import kotlin.test.assertEquals
 
-class Leet2349Test {
+class LeetCode2349Test {
     @Test
     fun case1() {
-        val sut = Leet2349.NumberContainers()
+        val sut = LeetCode2349.NumberContainers()
 
         assertEquals(-1, sut.find(10))
         sut.change(2, 10)
