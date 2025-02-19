@@ -21,4 +21,12 @@ class LeetCode2375Test {
             sut.smallestNumber("DDD")
         )
     }
+
+    @Test
+    fun case3() {
+        assertEquals(
+            "1234",
+            sut.smallestNumber("III")
+        )
+    }
 }

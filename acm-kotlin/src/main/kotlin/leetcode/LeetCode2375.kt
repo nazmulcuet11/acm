@@ -1,5 +1,6 @@
 package leetcode
 
+/*
 class LeetCode2375 {
     private fun solve(
         i: Int,
@@ -46,5 +47,45 @@ class LeetCode2375 {
             }
         }
         return "INVALID"
+    }
+}
+*/
+
+class LeetCode2375 {
+    fun smallestNumber(pattern: String): String {
+        val ans = CharArray(pattern.length + 1) { '0' }
+
+        val chars = "123456789"
+        var charIndex = 0
+        fun nextAvailableChar(): Char {
+            val c = chars[charIndex]
+            charIndex++
+            return c
+        }
+
+        var i = 0
+        while (i < pattern.length) {
+            if (pattern[i] == 'I') {
+                ans[i] = nextAvailableChar()
+                i++
+            } else {
+                var j = i
+                while (j < pattern.length && pattern[j] == 'D') {
+                    j++
+                }
+                val t = j
+                while (j >= i) {
+                    ans[j] = nextAvailableChar()
+                    j--
+                }
+                i = t + 1
+            }
+        }
+
+        if (i == pattern.length && ans[i] == '0') {
+            ans[i] = nextAvailableChar()
+        }
+
+        return ans.joinToString("")
     }
 }
