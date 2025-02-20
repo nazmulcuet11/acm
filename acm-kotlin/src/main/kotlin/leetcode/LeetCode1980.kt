@@ -1,5 +1,6 @@
 package leetcode
 
+/*
 class LeetCode1980 {
     private val existing = mutableSetOf<String>()
 
@@ -28,6 +29,21 @@ class LeetCode1980 {
 
         val ans = StringBuilder()
         generate(nums.first().length, ans)
+        return ans.toString()
+    }
+}
+*/
+
+class LeetCode1980 {
+    fun findDifferentBinaryString(nums: Array<String>): String {
+        val ans = StringBuilder()
+        for (i in nums.indices) {
+            if (nums[i][i] == '0') {
+                ans.append('1')
+            } else {
+                ans.append('0')
+            }
+        }
         return ans.toString()
     }
 }
