@@ -10,7 +10,7 @@ class LeetCode1028 {
 
     fun recoverFromPreorder(traversal: String): TreeNode? {
         var i = 0
-        val stack = Stack<Pair<Int, TreeNode>>()
+        val stack = Stack<TreeNode>()
         var root: TreeNode? = null
         while (i < traversal.length) {
             var depth = 0
@@ -30,19 +30,19 @@ class LeetCode1028 {
                 root = node
             }
 
-            while (stack.isNotEmpty() && stack.last().first != depth - 1) {
+            while (stack.isNotEmpty() && stack.size > depth) {
                 stack.pop()
             }
 
             if (stack.isNotEmpty()) {
-                if (stack.last().second.left == null) {
-                    stack.last().second.left = node
+                if (stack.last().left == null) {
+                    stack.last().left = node
                 } else {
-                    stack.last().second.right = node
+                    stack.last().right = node
                 }
             }
 
-            stack.add(Pair(depth, node))
+            stack.add(node)
         }
         return root
     }
