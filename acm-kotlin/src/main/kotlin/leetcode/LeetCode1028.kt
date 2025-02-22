@@ -21,7 +21,7 @@ class LeetCode1028 {
 
             var value = 0
             while (i < traversal.length && traversal[i].isDigit()) {
-                value = value * 10 + (traversal[i].code - '0'.code)
+                value = value * 10 + traversal[i].digitToInt()
                 i++
             }
 
@@ -30,19 +30,19 @@ class LeetCode1028 {
                 root = node
             }
 
-            while (stack.isNotEmpty() && stack.size > depth) {
+            while (stack.size > depth) {
                 stack.pop()
             }
 
             if (stack.isNotEmpty()) {
-                if (stack.last().left == null) {
-                    stack.last().left = node
+                if (stack.peek().left == null) {
+                    stack.peek().left = node
                 } else {
-                    stack.last().right = node
+                    stack.peek().right = node
                 }
             }
 
-            stack.add(node)
+            stack.push(node)
         }
         return root
     }
