@@ -27,4 +27,53 @@ class LeetCode3356Test {
             )
         )
     }
+
+    @Test
+    fun case3() {
+        assertEquals(
+            4,
+            sut.minZeroArray(
+                intArrayOf(2, 10),
+                arrayOf(
+                    intArrayOf(1, 1, 5),
+                    intArrayOf(0, 1, 2),
+                    intArrayOf(1, 1, 1),
+                    intArrayOf(1, 1, 5),
+                    intArrayOf(0, 1, 1),
+                    intArrayOf(0, 1, 4),
+                    intArrayOf(1, 1, 3),
+                    intArrayOf(1, 1, 3),
+                    intArrayOf(0, 0, 5),
+                    intArrayOf(0, 1, 2),
+                    intArrayOf(1, 1, 3),
+                    intArrayOf(1, 1, 4),
+                    intArrayOf(1, 1, 4),
+                    intArrayOf(0, 1, 5),
+                    intArrayOf(1, 1, 1)
+                )
+            )
+        )
+    }
+
+    @Test
+    fun case4() {
+        assertEquals(
+            6,
+            sut.minZeroArray(
+                intArrayOf(1, 0, 6),
+                arrayOf(
+                    intArrayOf(1, 2, 1),
+                    intArrayOf(0, 0, 4),
+                    intArrayOf(1, 1, 5),
+                    intArrayOf(0, 0, 5),
+                    intArrayOf(1, 2, 4),
+                    intArrayOf(0, 2, 2),
+                    intArrayOf(2, 2, 4),
+                    intArrayOf(1, 2, 2),
+                    intArrayOf(1, 2, 4),
+                    intArrayOf(0, 1, 3)
+                )
+            )
+        )
+    }
 }

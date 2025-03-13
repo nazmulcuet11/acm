@@ -1,5 +1,8 @@
 package leetcode
 
+import kotlin.math.max
+
+/*
 class LeetCode3356 {
     private fun verify(
         nums: IntArray,
@@ -44,5 +47,30 @@ class LeetCode3356 {
             return l
         }
         return -1
+    }
+}
+*/
+
+class LeetCode3356 {
+    fun minZeroArray(nums: IntArray, queries: Array<IntArray>): Int {
+        val subs = IntArray(nums.size + 1) { 0 }
+        var qc = 0
+        var sum = 0
+        for (i in nums.indices) {
+            while (sum + subs[i] < nums[i]) {
+                qc++
+                if (qc > queries.size) {
+                    return -1
+                }
+
+                val q = queries[qc - 1]
+                if (i <= q[1]) {
+                    subs[max(i, q[0])] += q[2]
+                    subs[q[1] + 1] -= q[2]
+                }
+            }
+            sum += subs[i]
+        }
+        return qc
     }
 }
