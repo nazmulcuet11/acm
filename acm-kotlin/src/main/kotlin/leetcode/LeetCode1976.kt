@@ -25,31 +25,24 @@ class LeetCode1976 {
             }
         }
 
-        val dag = Array(n) { mutableListOf<Int>() }
-        for (r in roads) {
-            if (costs[r[0]] + r[2] == costs[r[1]]) {
-                dag[r[1]].add(r[0])
-            } else if (costs[r[1]] + r[2] == costs[r[0]]) {
-                dag[r[0]].add(r[1])
-            }
-        }
-
         val mod = 1_000_000_000 + 7
         val ways = Array<Long>(n) { -1 }
-        fun dfs(u: Int): Long {
-            if (u == 0) {
+        fun dfs(v: Int): Long {
+            if (v == 0) {
                 return 1
             }
 
-            if (ways[u] != -1L) {
-                return ways[u]
+            if (ways[v] != -1L) {
+                return ways[v]
             }
 
             var ans = 0L
-            for (v in dag[u]) {
-                ans = (ans + dfs(v)) % mod
+            for ((u, c) in graph[v]) {
+                if (costs[u] + c == costs[v]) {
+                    ans = (ans + dfs(u)) % mod
+                }
             }
-            ways[u] = ans
+            ways[v] = ans
             return ans
         }
 
