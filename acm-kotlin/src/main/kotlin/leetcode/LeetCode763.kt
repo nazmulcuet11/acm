@@ -2,6 +2,7 @@ package leetcode
 
 import kotlin.math.max
 
+/*
 class LeetCode763 {
     fun partitionLabels(s: String): List<Int> {
         val firstIndex = mutableMapOf<Char, Int>()
@@ -43,6 +44,32 @@ class LeetCode763 {
         val ans = mutableListOf<Int>()
         for (interval in mergedIntervals) {
             ans.add(interval.second - interval.first + 1)
+        }
+        return ans
+    }
+}
+*/
+
+class LeetCode763 {
+    fun partitionLabels(s: String): List<Int> {
+        val lastIndex = mutableMapOf<Char, Int>()
+        for ((i, c) in s.withIndex()) {
+            lastIndex[c] = i
+        }
+
+        val ans = mutableListOf<Int>()
+        var i = 0
+        var j = 0
+        while (j < s.length) {
+            var end = lastIndex[s[j]]!!
+            while (j < end) {
+                end = max(end, lastIndex[s[j]]!!)
+                j++
+            }
+
+            ans.add(j - i + 1)
+            j++
+            i = j
         }
         return ans
     }
