@@ -2,30 +2,22 @@ package leetcode
 
 class LeetCode1863 {
     fun subsetXORSum(nums: IntArray): Int {
-        val subsets = mutableListOf<List<Int>>()
-        fun generate(i: Int, subset: List<Int>) {
+        val subsetXorList = mutableListOf<Int>()
+        fun generate(i: Int, subsetXor: Int) {
             if (i >= nums.size) {
-                subsets.add(subset)
+                subsetXorList.add(subsetXor)
                 return
             }
 
-            generate(i + 1, subset)
-            generate(i + 1, subset + listOf(nums[i]))
+            generate(i + 1, subsetXor)
+            generate(i + 1, subsetXor xor nums[i])
         }
 
-        generate(0, listOf())
-
-        fun subsetXor(subset: List<Int>): Int {
-            var ans = 0
-            for (n in subset) {
-                ans = ans xor n
-            }
-            return ans
-        }
+        generate(0, 0)
 
         var sum = 0
-        for (subset in subsets) {
-            sum += subsetXor(subset)
+        for (subsetXor in subsetXorList) {
+            sum += subsetXor
         }
 
         return sum
