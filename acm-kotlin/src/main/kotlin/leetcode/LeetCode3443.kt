@@ -5,13 +5,7 @@ import kotlin.math.min
 
 class LeetCode3443 {
     fun maxDistance(s: String, k: Int): Int {
-        fun solve(a: Int, b: Int, k: Int): Int {
-            val x = min(a, b)
-            val y = max(a, b)
-            val z = minOf(a, b, k)
-            return x - y + 2 * z
-        }
-
+        fun solve(a: Int, b: Int, k: Int) = max(a, b) - min(a, b) + 2 * minOf(a, b, k)
         fun solve(n: Int, s: Int, e: Int, w: Int) = solve(n, s, k) + solve(e, w, k - minOf(n, s, k))
 
         var nCount = 0
