@@ -1,7 +1,6 @@
 package leetcode
 
 import kotlin.math.max
-import kotlin.math.min
 
 class LeetCode2014 {
     fun longestSubsequenceRepeatedK(s: String, k: Int): String {
@@ -25,8 +24,7 @@ class LeetCode2014 {
             maxRepetitionInSingleSequence = max(maxRepetitionInSingleSequence, count / k)
         }
 
-        var ans = ""
-        fun updateAnsIfNeeded(sub: String) {
+        fun isKRepeatingSub(sub: String): Boolean {
             var matchStart = 0
             fun hasMatch(): Boolean {
                 var i = matchStart
@@ -46,47 +44,34 @@ class LeetCode2014 {
             while (count < k && hasMatch()) {
                 count++
             }
-            if (count >= k) {
+            return count >= k
+        }
+
+        var ans = ""
+        val takenCount = mutableMapOf<Char, Int>()
+        val sb = StringBuilder()
+        fun generate() {
+            val sub = sb.toString()
+            if (sub.isNotEmpty() && !isKRepeatingSub(sub)) {
+                return
+            }
+
+            if (ans.length < sub.length) {
                 ans = sub
             }
-        }
 
-        fun tryToGenerateAns(len: Int) {
-            val takenCount = mutableMapOf<Char, Int>()
-            val  sb = StringBuilder()
-            fun solve() {
-                if (ans != "") {
-                    // no need to try more
-                    return
-                }
-
-                if (sb.length == len) {
-                    val sub = sb.toString()
-                    updateAnsIfNeeded(sub)
-                    return
-                }
-
-                for (c in candidateChars) {
-                    if (takenCount.getOrDefault(c, 0) < maxRepetitionInSingleSequence) {
-                        sb.append(c)
-                        takenCount[c] = takenCount.getOrDefault(c, 0) + 1
-                        solve()
-                        sb.deleteCharAt(sb.length - 1)
-                        takenCount[c] = takenCount.getOrDefault(c, 0) - 1
-                    }
+            for (c in candidateChars) {
+                if (takenCount.getOrDefault(c, 0) < maxRepetitionInSingleSequence) {
+                    sb.append(c)
+                    takenCount[c] = takenCount.getOrDefault(c, 0) + 1
+                    generate()
+                    sb.deleteCharAt(sb.length - 1)
+                    takenCount[c] = takenCount.getOrDefault(c, 0) - 1
                 }
             }
-
-            solve()
         }
 
-        val maxLen = min(s.length / k, maxRepetitionInSingleSequence * candidateChars.size)
-        for (len in maxLen downTo 1) {
-            tryToGenerateAns(len)
-            if (ans != "") {
-                break
-            }
-        }
+        generate()
         return ans
     }
 }
