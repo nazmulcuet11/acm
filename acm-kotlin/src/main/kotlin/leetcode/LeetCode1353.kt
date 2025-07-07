@@ -1,6 +1,7 @@
 package leetcode
 
-import java.util.PriorityQueue
+import java.util.*
+import kotlin.math.max
 
 class LeetCode1353 {
     fun maxEvents(events: Array<IntArray>): Int {
@@ -19,10 +20,7 @@ class LeetCode1353 {
             }
         }
 
-        enqueue()
-
-        while (day < maxDay) {
-
+        fun dequeue() {
             while (queue.isNotEmpty()) {
                 val event = queue.poll()
                 if (day <= event[1]) {
@@ -31,10 +29,19 @@ class LeetCode1353 {
                     enqueue()
                 }
             }
-
-            day++
-            enqueue()
         }
+
+        enqueue()
+
+        while (i < events.size && day <= maxDay) {
+            dequeue()
+            if (i < events.size) {
+                day = max(day, events[i][0])
+                enqueue()
+            }
+        }
+
+        dequeue()
 
         return ans
     }
