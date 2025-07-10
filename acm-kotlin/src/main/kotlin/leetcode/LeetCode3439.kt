@@ -5,23 +5,12 @@ import kotlin.math.min
 
 class LeetCode3439 {
     fun maxFreeTime(eventTime: Int, k: Int, startTime: IntArray, endTime: IntArray): Int {
-        data class Meeting(val start: Int, val end: Int)
-
-        val meetings = mutableListOf<Meeting>()
-        startTime.zip(endTime).forEach {
-            meetings.add(Meeting(it.first, it.second))
-        }
-
-        meetings.sortBy { it.start }
-
         val gaps = mutableListOf<Int>()
         var lastEnd = 0
-        for (meeting in meetings) {
-            val gap = meeting.start - lastEnd
-            if (gap > 0) {
-                gaps.add(gap)
-            }
-            lastEnd = meeting.end
+        for (i in startTime.indices) {
+            val gap = startTime[i] - lastEnd
+            gaps.add(gap)
+            lastEnd = endTime[i]
         }
 
         if (lastEnd < eventTime) {
