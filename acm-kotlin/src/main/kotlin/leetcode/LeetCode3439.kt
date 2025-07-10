@@ -43,11 +43,3 @@ class LeetCode3439 {
         return ans
     }
 }
-
-/*
-
-k = 2
-__*_*_*_*_*_*_*_
-
-
-*/
