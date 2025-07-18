@@ -44,7 +44,7 @@ class LeetCode2163 {
         populateMaxSum()
 
         var ans = Long.MAX_VALUE
-        for (i in (n-1)..<2 * n) {
+        for (i in (n - 1)..<2 * n) {
             ans = min(ans, minSum[i] - maxSum[i + 1])
         }
         return ans
