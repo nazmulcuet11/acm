@@ -34,7 +34,7 @@ class LeetCode3480 {
             }
 
             ansWithoutRemoving += r - left
-            gain[left] += left - secondLeft
+            gain[left] += (left - secondLeft).toLong()
             maxGain = max(maxGain, gain[left])
         }
 
