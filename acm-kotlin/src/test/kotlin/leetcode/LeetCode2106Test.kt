@@ -7,6 +7,51 @@ class LeetCode2106Test {
     private val sut = LeetCode2106()
 
     @Test
+    fun case1() {
+        val fruits: Array<IntArray> = arrayOf(
+            intArrayOf(2, 8),
+            intArrayOf(6, 3),
+            intArrayOf(8, 6)
+        )
+
+        assertEquals(
+            9,
+            sut.maxTotalFruits(fruits, 5, 4)
+        )
+    }
+
+    @Test
+    fun case2() {
+        val fruits: Array<IntArray> = arrayOf(
+            intArrayOf(0, 9),
+            intArrayOf(4, 1),
+            intArrayOf(5, 7),
+            intArrayOf(6, 2),
+            intArrayOf(7, 4),
+            intArrayOf(10, 9)
+        )
+
+        assertEquals(
+            14,
+            sut.maxTotalFruits(fruits, 5, 4)
+        )
+    }
+
+    @Test
+    fun case3() {
+        val fruits: Array<IntArray> = arrayOf(
+            intArrayOf(0, 3),
+            intArrayOf(6, 4),
+            intArrayOf(8, 5)
+        )
+
+        assertEquals(
+            0,
+            sut.maxTotalFruits(fruits, 3, 2)
+        )
+    }
+
+    @Test
     fun case5() {
         val fruits: Array<IntArray> = arrayOf(
             intArrayOf(0, 7),

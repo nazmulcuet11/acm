@@ -12,7 +12,6 @@ class LeetCode2106 {
                 psum[i] += psum[i - 1]
             }
         }
-        // println(psum.toList())
 
         // find the maximum index `i` after start where the fruits[i][0] <= pos
         fun findMaxIndex(pos: Int, start: Int): Int {
@@ -37,41 +36,27 @@ class LeetCode2106 {
                 sum -= psum[i - 1]
             }
 
-            if (sum > ans) {
-                println("i: $i, j: $j, sum: $sum")
-            }
-
             ans = max(ans, sum)
         }
 
-        for (i in fruits.indices) {
-            if (fruits[i][0] > startPos) {
-                if (fruits[i][0] - startPos <= k) {
-                    // traverse only right
-                    val j = findMaxIndex(startPos + k, i)
-                    updateAns(i, j)
-                }
-                break
-            }
+        var i = 0
 
-            val leftDist = startPos - fruits[i][0]
-            if (leftDist <= k) {
-                // traverse only left
-                val j = findMaxIndex(startPos, i)
-                updateAns(i, j)
-            }
+        while (i < n && fruits[i][0] < startPos - k) {
+            i++
+        }
 
-            if (leftDist * 2 <= k) {
-                // traverse left first and then right
-                val j = findMaxIndex(startPos + (k - 2 * leftDist), i)
-                updateAns(i, j)
-            }
+        while (i < n && fruits[i][0] <= startPos + k) {
+            val leftDist = max(0, startPos - fruits[i][0])
 
-            if (leftDist <= k) {
-                // traverse right first and then left
-                val j = findMaxIndex(startPos + (k - leftDist) / 2, i)
-                updateAns(i, j)
-            }
+            // left first and then right
+            var j = findMaxIndex(startPos + k - 2 * leftDist, i)
+            updateAns(i, j)
+
+            // right first and then left
+            j = findMaxIndex(startPos + (k - leftDist) / 2, i)
+            updateAns(i, j)
+
+            i++
         }
 
         return ans
