@@ -40,50 +40,39 @@ class LeetCode3197 {
             )
         }
 
-        fun partition(rect: Rectangle, rem: Int): Int {
-            if (rem == 1) {
+        fun partition(rect: Rectangle, part: Int): Int {
+            if (part == 1) {
                 return shrink(rect).area()
-            } else if (rem == 2) {
-                var ans = shrink(rect).area()
-
-                // = pattern
-                for (i in rect.minX..<rect.maxX) {
-                    val region1 = Rectangle(rect.minX, rect.minY, i, rect.maxY)
-                    val region2 = Rectangle(i + 1, rect.minY, rect.maxX, rect.maxY)
-                    ans = min(ans, shrink(region1).area() + shrink(region2).area())
-                }
-
-                // || pattern
-                for (j in rect.minY..<rect.maxY) {
-                    val region1 = Rectangle(rect.minX, rect.minY, rect.maxX, j)
-                    val region2 = Rectangle(rect.minX, j + 1, rect.maxX, rect.maxY)
-                    ans = min(ans, shrink(region1).area() + shrink(region2).area())
-                }
-
-                return ans
-            } else {
-                var ans = shrink(rect).area()
-
-                // = pattern
-                for (i in rect.minX..<rect.maxX) {
-                    val region1 = Rectangle(rect.minX, rect.minY, i, rect.maxY)
-                    val region2 = Rectangle(i + 1, rect.minY, rect.maxX, rect.maxY)
-                    ans = min(ans, shrink(region1).area() + partition(region2, 2))
-                    ans = min(ans, partition(region1, 2) + shrink(region2).area())
-                }
-
-                // || pattern
-                for (j in rect.minY..<rect.maxY) {
-                    val region1 = Rectangle(rect.minX, rect.minY, rect.maxX, j)
-                    val region2 = Rectangle(rect.minX, j + 1, rect.maxX, rect.maxY)
-                    ans = min(ans, shrink(region1).area() + partition(region2, 2))
-                    ans = min(ans, partition(region1, 2) + shrink(region2).area())
-                }
-
-                return ans
             }
-        }
 
+            var ans = shrink(rect).area()
+
+            // = pattern
+            for (i in rect.minX..<rect.maxX) {
+                val region1 = Rectangle(rect.minX, rect.minY, i, rect.maxY)
+                val region2 = Rectangle(i + 1, rect.minY, rect.maxX, rect.maxY)
+                if (part == 2) {
+                    ans = min(ans, partition(region1, 1) + partition(region2, 1))
+                } else if (part == 3) {
+                    ans = min(ans, partition(region1, 1) + partition(region2, 2))
+                    ans = min(ans, partition(region1, 2) + partition(region2, 1))
+                }
+            }
+
+            // || pattern
+            for (j in rect.minY..<rect.maxY) {
+                val region1 = Rectangle(rect.minX, rect.minY, rect.maxX, j)
+                val region2 = Rectangle(rect.minX, j + 1, rect.maxX, rect.maxY)
+                if (part == 2) {
+                    ans = min(ans, partition(region1, 1) + partition(region2, 1))
+                } else if (part == 3) {
+                    ans = min(ans, partition(region1, 1) + partition(region2, 2))
+                    ans = min(ans, partition(region1, 2) + partition(region2, 1))
+                }
+            }
+
+            return ans
+        }
 
         val m = grid.size
         val n = grid[0].size
