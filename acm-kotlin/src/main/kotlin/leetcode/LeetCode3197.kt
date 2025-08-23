@@ -51,11 +51,8 @@ class LeetCode3197 {
             for (i in rect.minX..<rect.maxX) {
                 val region1 = Rectangle(rect.minX, rect.minY, i, rect.maxY)
                 val region2 = Rectangle(i + 1, rect.minY, rect.maxX, rect.maxY)
-                if (part == 2) {
-                    ans = min(ans, partition(region1, 1) + partition(region2, 1))
-                } else if (part == 3) {
-                    ans = min(ans, partition(region1, 1) + partition(region2, 2))
-                    ans = min(ans, partition(region1, 2) + partition(region2, 1))
+                for (p in 1..<part) {
+                    ans = min(ans, partition(region1, p) + partition(region2, part - p))
                 }
             }
 
@@ -63,11 +60,8 @@ class LeetCode3197 {
             for (j in rect.minY..<rect.maxY) {
                 val region1 = Rectangle(rect.minX, rect.minY, rect.maxX, j)
                 val region2 = Rectangle(rect.minX, j + 1, rect.maxX, rect.maxY)
-                if (part == 2) {
-                    ans = min(ans, partition(region1, 1) + partition(region2, 1))
-                } else if (part == 3) {
-                    ans = min(ans, partition(region1, 1) + partition(region2, 2))
-                    ans = min(ans, partition(region1, 2) + partition(region2, 1))
+                for (p in 1..<part) {
+                    ans = min(ans, partition(region1, p) + partition(region2, part - p))
                 }
             }
 
@@ -77,9 +71,8 @@ class LeetCode3197 {
         val m = grid.size
         val n = grid[0].size
 
-        val wholeGridRect = Rectangle(0, 0, m - 1, n - 1)
-        val rectCoveringAllOnes = shrink(wholeGridRect)
-        val ans = partition(rectCoveringAllOnes, 3)
+        val gridRect = Rectangle(0, 0, m - 1, n - 1)
+        val ans = partition(gridRect, 3)
         return ans
     }
 }
