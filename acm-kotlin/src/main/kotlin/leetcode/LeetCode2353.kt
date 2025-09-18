@@ -1,107 +1,52 @@
 package leetcode
 
+import java.util.TreeSet
+
 class LeetCode2353 {
-    data class Food(val name: String, val rating: Int) {
-        operator fun compareTo(other: Food): Int {
+    data class FoodData(val name: String, val rating: Int, val cuisine: String): Comparable<FoodData> {
+        override fun compareTo(other: FoodData): Int {
             if (rating == other.rating) {
-                return other.name.compareTo(name)
+                return name.compareTo(other.name)
             }
-            return rating.compareTo(other.rating)
-        }
-    }
-
-    class Heap {
-        private val foods = mutableListOf<Food>()
-        private val foodIndex = mutableMapOf<String, Int>()
-
-        fun add(food: Food) {
-            foods.add(food)
-            foodIndex[food.name] = foods.size - 1
-            swim(foods.size - 1)
-        }
-
-//        fun remove(food: Food) {
-//            val index = foodIndex[food.name] ?: return
-//            swapFoods(index, foods.size - 1)
-//            foods.removeLast()
-//            foodIndex.remove(food.name)
-//            dive(index)
-//        }
-
-        fun remove(name: String) {
-            val index = foodIndex[name] ?: return
-            swapFoods(index, foods.size - 1)
-            foods.removeLast()
-            foodIndex.remove(name)
-            dive(index)
-        }
-
-        fun top(): Food  = foods.first()
-
-        private fun swim(index: Int) {
-            val parentIndex = (index - 1) / 2
-            if (foods[index] > foods[parentIndex]) {
-                swapFoods(index, parentIndex)
-                swim(parentIndex)
-            }
-        }
-
-        private fun dive(index: Int) {
-            val leftIndex = index * 2 + 1
-            val rightIndex = index * 2 + 2
-
-            var maxIndex = index
-            if (leftIndex < foods.size && foods[leftIndex] > foods[maxIndex]) {
-                maxIndex = leftIndex
-            }
-            if (rightIndex < foods.size && foods[rightIndex] > foods[maxIndex]) {
-                maxIndex = rightIndex
-            }
-
-            if (index != maxIndex) {
-                swapFoods(index, maxIndex)
-                dive(maxIndex)
-            }
-        }
-
-        private fun swapFoods(index1: Int, index2: Int) {
-            val food1 = foods[index1]
-            val food2 = foods[index2]
-            foods[index1] = food2
-            foods[index2] = food1
-            foodIndex[food1.name] = index2
-            foodIndex[food2.name] = index1
+            return other.rating.compareTo(rating)
         }
     }
 
     class FoodRatings(foods: Array<String>, cuisines: Array<String>, ratings: IntArray) {
-        private val heaps = mutableMapOf<String, Heap>()
-        private val foodCuisines = mutableMapOf<String, String>()
+        private val foodDataMap = mutableMapOf<String, FoodData>()
+        private val cuisineToFoods = mutableMapOf<String, TreeSet<FoodData>>()
 
         init {
             for (i in foods.indices) {
-                val food = Food(
+                val foodData = FoodData(
                     name = foods[i],
-                    rating = ratings[i]
+                    rating = ratings[i],
+                    cuisine = cuisines[i]
                 )
-                if (heaps[cuisines[i]] == null) {
-                    heaps[cuisines[i]] = Heap()
-                }
-                heaps[cuisines[i]]?.add(food)
-                foodCuisines[foods[i]] = cuisines[i]
+                add(foodData)
             }
         }
 
         fun changeRating(food: String, newRating: Int) {
-            val cuisine = foodCuisines[food] ?: return
-            val heap = heaps[cuisine] ?: return
-            heap.remove(food)
-            heap.add(Food(food, newRating))
+            val oldFoodData = foodDataMap[food] ?: return
+            remove(oldFoodData)
+            val newFoodData = FoodData(food, newRating, oldFoodData.cuisine)
+            add(newFoodData)
         }
 
         fun highestRated(cuisine: String): String {
-            val heap = heaps[cuisine] ?: return ""
-            return heap.top().name
+            val foodDataSet = cuisineToFoods[cuisine] ?: return ""
+            return foodDataSet.first().name
+        }
+
+        private fun add(foodData: FoodData) {
+            foodDataMap[foodData.name] = foodData
+            cuisineToFoods.getOrPut(foodData.cuisine) { TreeSet() }.add(foodData)
+        }
+
+        private fun remove(foodData: FoodData) {
+            foodDataMap.remove(foodData.name)
+            cuisineToFoods[foodData.cuisine]?.remove(foodData)
         }
     }
 }
